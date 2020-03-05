@@ -47,6 +47,7 @@ while 1:
 	for i in range(0,utility.shape[0]):
 		for j in range(0, utility.shape[1]):
 			for k in range(0, utility.shape[2]):
+				action="-1"
 				updateutility(i, j, k, utility)
 				print("(", i, ",", j, ",", k, "):",action,"=[", utility[i][j][k], "]", sep="")
 				
