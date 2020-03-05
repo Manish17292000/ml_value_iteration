@@ -13,7 +13,10 @@ def recharge(i, j, k, utility):
 
 def shoot(i, j, k, utility):
 	if j and k:
-		return 0.5*(stepcost+finalreward+Y*utility[i-1][j-1][k-1])+0.5*(stepcost+Y*utility[i][j-1][k-1])
+		if i==1:
+			return 0.5*(stepcost+finalreward+Y*utility[i-1][j-1][k-1])+0.5*(stepcost+Y*utility[i][j-1][k-1])
+		else:
+			return 0.5*(stepcost+Y*utility[i-1][j-1][k-1])+0.5*(stepcost+Y*utility[i][j-1][k-1])
 	else :
 		return -100000
 
@@ -49,11 +52,11 @@ while 1:
 			for k in range(0, utility.shape[2]):
 				action="-1"
 				updateutility(i, j, k, utility)
-				print("(", i, ",", j, ",", k, "):",action,"=[", utility[i][j][k], "]", sep="")
+				print("(", i, ",", j, ",", k, "):",action,"=[", round(utility[i][j][k], 3), "]", sep="")
 				
 	print()
 	print()
-	if delta>np.max(previousutility-utility):
+	if delta>np.max(abs(previousutility-utility)):
 		break
 
 print(iteration)
