@@ -9,22 +9,22 @@ utility=np.zeros([5, 4, 3], dtype=float)
 action="-1"
 
 def recharge(i, j, k, utility):
-	return 0.8*(stepcost+Y*utility[i][j][min(utility.shape[2]-1, k+1)])+0.2*(stepcost+Y*utility[i][j][k])
+	return round(0.8*(stepcost+Y*utility[i][j][min(utility.shape[2]-1, k+1)])+0.2*(stepcost+Y*utility[i][j][k]), 11)
 
 def shoot(i, j, k, utility):
 	if j and k:
 		if i==1:
-			return 0.5*(stepcost+finalreward+Y*utility[i-1][j-1][k-1])+0.5*(stepcost+Y*utility[i][j-1][k-1])
+			return round(0.5*(stepcost+finalreward+Y*utility[i-1][j-1][k-1])+0.5*(stepcost+Y*utility[i][j-1][k-1]), 11)
 		else:
-			return 0.5*(stepcost+Y*utility[i-1][j-1][k-1])+0.5*(stepcost+Y*utility[i][j-1][k-1])
+			return round(0.5*(stepcost+Y*utility[i-1][j-1][k-1])+0.5*(stepcost+Y*utility[i][j-1][k-1]),11)
 	else :
 		return -100000
 
 def dodge(i, j, k, utility):
 	if k==2:
-		return 0.8*(0.8*(stepcost+Y*utility[i][min(j+1, utility.shape[1]-1)][k-1])+0.2*(stepcost+Y*utility[i][j][k-1]))+0.2*(0.8*(stepcost+Y*utility[i][min(j+1, utility.shape[1]-1)][k-2])+0.2*(stepcost+Y*utility[i][j][k-2]))
+		return round(0.8*(0.8*(stepcost+Y*utility[i][min(j+1, utility.shape[1]-1)][k-1])+0.2*(stepcost+Y*utility[i][j][k-1]))+0.2*(0.8*(stepcost+Y*utility[i][min(j+1, utility.shape[1]-1)][k-2])+0.2*(stepcost+Y*utility[i][j][k-2])), 11)
 	elif k==1:
-		return 0.8*(stepcost+Y*utility[i][min(j+1, utility.shape[1]-1)][k-1])+0.2*(stepcost+Y*utility[i][j][k-1])
+		return round(0.8*(stepcost+Y*utility[i][min(j+1, utility.shape[1]-1)][k-1])+0.2*(stepcost+Y*utility[i][j][k-1]), 11)
 	else :
 		return -100000
 
